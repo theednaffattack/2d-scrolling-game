@@ -16,3 +16,17 @@ if (!context) {
   throw new Error("Context object is missing!");
 }
 const drawnPlayer = player.draw(context);
+
+function animate() {
+  if (!canvas) {
+    throw new Error("Canvas element is missing!");
+  }
+  if (!context) {
+    throw new Error("Context object is missing!");
+  }
+  requestAnimationFrame(animate);
+  context.clearRect(0, 0, canvas.width, canvas.height);
+  player.update(context);
+}
+
+animate();
