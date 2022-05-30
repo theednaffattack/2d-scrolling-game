@@ -9,7 +9,7 @@ This repo is for learning simple game development for the browser.
 
 ## Project Checklist
 
-1. [] Project Setup
+1. [x] Project Setup
 2. [] Player Creation
 3. [] Gravity
 4. [] Player Movement
