@@ -1,3 +1,6 @@
+import { GRAVITY } from "./constants";
+import { canvas } from "./main";
+
 type XPosition = number;
 type YPosition = number;
 type XDir = -1 | 0 | 1;
@@ -29,7 +32,7 @@ export class Player {
     };
     this.velocity = {
       x: 0,
-      y: 3,
+      y: 1,
     };
     this.width = 30;
   }
@@ -42,5 +45,13 @@ export class Player {
   update(context: CanvasRenderingContext2D) {
     this.draw(context);
     this.position.y += this.velocity.y;
+    if (
+      canvas &&
+      this.position.y + this.height + this.velocity.y <= canvas.height
+    ) {
+      this.velocity.y += GRAVITY;
+    } else {
+      this.velocity.y = 0;
+    }
   }
 }
