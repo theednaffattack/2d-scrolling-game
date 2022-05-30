@@ -45,6 +45,7 @@ export class Player {
   update(context: CanvasRenderingContext2D) {
     this.draw(context);
     this.position.y += this.velocity.y;
+    this.position.x += this.velocity.x;
     if (
       canvas &&
       this.position.y + this.height + this.velocity.y <= canvas.height

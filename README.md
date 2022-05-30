@@ -12,7 +12,7 @@ This repo is for learning simple game development for the browser.
 1. [x] Project Setup
 2. [x] Player Creation
 3. [x] Gravity
-4. [] Player Movement
+4. [x] Player Movement
 5. [] Platforms
 6. [] "scroll" the background
 7. [] Win scenario
