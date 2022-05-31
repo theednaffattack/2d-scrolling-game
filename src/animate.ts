@@ -7,16 +7,25 @@ interface AnimateProps {
   context: CanvasRenderingContext2D;
   player: Player;
   platforms: Platform[];
+  scrollOffset: number;
 }
 
-export function animate({ canvas, context, player, platforms }: AnimateProps) {
+export function animate({
+  canvas,
+  context,
+  player,
+  platforms,
+  scrollOffset,
+}: AnimateProps) {
   if (!canvas) {
     throw new Error("Canvas element is missing!");
   }
   if (!context) {
     throw new Error("Context object is missing!");
   }
-  requestAnimationFrame(() => animate({ canvas, context, player, platforms }));
+  requestAnimationFrame(() =>
+    animate({ canvas, context, player, platforms, scrollOffset })
+  );
 
   context.clearRect(0, 0, canvas.width, canvas.height);
   player.update(context);
@@ -36,10 +45,12 @@ export function animate({ canvas, context, player, platforms }: AnimateProps) {
 
     // Move the platform right at the current player speed
     if (keys.right.pressed) {
+      scrollOffset += 5;
       platforms.forEach((platform) => {
         platform.position.x -= 5;
       });
     } else if (keys.left.pressed) {
+      scrollOffset -= 5;
       platforms.forEach((platform) => {
         platform.position.x += 5;
       });
@@ -57,4 +68,9 @@ export function animate({ canvas, context, player, platforms }: AnimateProps) {
       player.velocity.y = 0;
     }
   });
+
+  // Win scenario
+  if (scrollOffset >= 2000) {
+    console.log("YOU WIN");
+  }
 }
