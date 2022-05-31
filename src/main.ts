@@ -1,3 +1,4 @@
+import { Platform } from "./platform";
 import { Player } from "./player";
 
 export const canvas = document.querySelector("canvas");
@@ -11,6 +12,7 @@ canvas.height = innerHeight;
 const context = canvas?.getContext("2d");
 
 const player = new Player();
+const platform = new Platform();
 const keys = {
   up: {
     pressed: false,
@@ -44,6 +46,8 @@ function animate() {
   frameRate++;
   context.clearRect(0, 0, canvas.width, canvas.height);
   player.update(context);
+  platform.draw(context);
+
   if (keys.right.pressed) {
     player.velocity.x = 5;
   } else if (keys.left.pressed) {
@@ -71,7 +75,7 @@ addEventListener("keydown", ({ key }: KeyboardEvent) => {
     switch (key) {
       case "w":
         keys.up.pressed = true;
-        player.velocity.y -= 9;
+        player.velocity.y -= 15;
         break;
       case "a":
         keys.left.pressed = true;
@@ -90,7 +94,7 @@ addEventListener("keydown", ({ key }: KeyboardEvent) => {
         break;
       case "ArrowUp":
         keys.up.pressed = true;
-        player.velocity.y -= 9;
+        player.velocity.y -= 15;
         break;
       case "ArrowDown":
         keys.down.pressed = true;
