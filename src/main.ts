@@ -26,7 +26,9 @@ if (!context) {
 
 player.draw(context);
 
-animate({ canvas, context, player, platforms });
+let scrollOffset = 0;
+
+animate({ canvas, context, player, platforms, scrollOffset });
 
 addEventListener("keydown", (evt) => handleKeydown(evt, player));
 
