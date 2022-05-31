@@ -16,7 +16,6 @@ export const keys = {
 };
 
 export function handleKeydown({ key }: KeyboardEvent, player: Player) {
-  console.log("VIEW ARGUMENTS INSIDE KEYDOWN HANDLER", { player, key });
   const playerMovements = [
     "ArrowLeft",
     "ArrowRight",
@@ -32,7 +31,7 @@ export function handleKeydown({ key }: KeyboardEvent, player: Player) {
     switch (key) {
       case "w":
         keys.up.pressed = true;
-        player.velocity.y -= 15;
+        player.velocity.y -= 20;
         break;
       case "a":
         keys.left.pressed = true;
@@ -51,7 +50,7 @@ export function handleKeydown({ key }: KeyboardEvent, player: Player) {
         break;
       case "ArrowUp":
         keys.up.pressed = true;
-        player.velocity.y -= 15;
+        player.velocity.y -= 20;
         break;
       case "ArrowDown":
         keys.down.pressed = true;
