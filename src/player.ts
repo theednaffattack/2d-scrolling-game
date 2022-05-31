@@ -5,7 +5,7 @@ type XPosition = number;
 type YPosition = number;
 type XDir = -1 | 0 | 1;
 type YDir = -1 | 0 | 1;
-type Coords = { x: XPosition; y: YPosition };
+export type Coords = { x: XPosition; y: YPosition };
 interface Vector {
   x: XDir;
   y: YDir;
