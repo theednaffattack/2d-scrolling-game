@@ -15,7 +15,7 @@ This repo is for learning simple game development for the browser.
 4. [x] Player Movement
 5. [x] Platforms
 6. [x] "scroll" the background
-7. [] Win scenario
+7. [x] Win scenario
 8. [] Image Platforms
 9. [] Paralax scroll
 10. [] Death pits
