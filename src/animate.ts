@@ -28,12 +28,12 @@ export function animate({
   );
 
   context.clearRect(0, 0, canvas.width, canvas.height);
-  player.update(context);
 
   platforms.forEach((platform) => {
     platform.draw(context);
   });
 
+  player.update(context);
   // Move player left and right
   // But stop moving at 400 pixels
   if (keys.right.pressed && player.position.x <= 400) {
