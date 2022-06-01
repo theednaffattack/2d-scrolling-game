@@ -3,24 +3,28 @@ import { Coords } from "./player";
 interface PlatformProps {
   x: number;
   y: number;
+  image: HTMLImageElement;
 }
 
 export class Platform {
   height: number;
   position: Coords;
   width: number;
+  image: HTMLImageElement;
 
-  constructor({ x, y }: PlatformProps) {
-    this.height = 20;
+  constructor({ x, y, image }: PlatformProps) {
     this.position = {
       x,
       y,
     };
-    this.width = 200;
+    this.image = image;
+    this.height = image.height;
+    this.width = image.width;
   }
 
   draw(context: CanvasRenderingContext2D) {
-    context.fillStyle = "blue";
-    context.fillRect(this.position.x, this.position.y, this.width, this.height);
+    context.drawImage(this.image, this.position.x, this.position.y);
+    // context.fillStyle = "blue";
+    // context.fillRect(this.position.x, this.position.y, this.width, this.height);
   }
 }
