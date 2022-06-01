@@ -20,9 +20,9 @@ const config = {
 
 canvas.width = config.canvas.width;
 canvas.height = config.canvas.height;
-export const context = canvas?.getContext("2d");
+export const context = canvas.getContext("2d");
 
-export const player = new Player();
+export let player = new Player();
 
 const platformImage = newImage(platform);
 
@@ -30,12 +30,12 @@ const hillImage = newImage(hills);
 
 const backgroundImage = newImage(background);
 
-export const platforms = [
+export let platforms = [
   new Platform({ x: -1, y: 470, image: platformImage }),
-  new Platform({ x: platformImage.width - 3, y: 470, image: platformImage }),
+  new Platform({ x: platformImage.width + 100, y: 470, image: platformImage }),
 ];
 
-const genericEntities = [
+let genericEntities = [
   new GenericEntity({
     x: -1,
     y: -1,
@@ -50,13 +50,13 @@ const genericEntities = [
   }),
 ];
 
+let scrollOffset = 0;
+
 if (!context) {
   throw new Error("Context object is missing!");
 }
 
 player.draw(context);
-
-let scrollOffset = 0;
 
 animate({ canvas, context, genericEntities, player, platforms, scrollOffset });
 

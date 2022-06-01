@@ -44,15 +44,19 @@ export class Player {
 
   update(context: CanvasRenderingContext2D) {
     this.draw(context);
+    // Use velocity to move the player
     this.position.y += this.velocity.y;
     this.position.x += this.velocity.x;
     if (
       canvas &&
-      this.position.y + this.height + this.velocity.y <= canvas.height
+      this.position.y + this.height + this.velocity.y <=
+        canvas.height + this.height
     ) {
       this.velocity.y += GRAVITY;
     } else {
-      this.velocity.y = 0;
+      // Set velocity to one if the player falls off
+      // the canvas
+      this.velocity.y = 1;
     }
   }
 }
