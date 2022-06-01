@@ -27,7 +27,8 @@ export function animate({
     animate({ canvas, context, player, platforms, scrollOffset })
   );
 
-  context.clearRect(0, 0, canvas.width, canvas.height);
+  context.fillStyle = "white";
+  context.fillRect(0, 0, canvas.width, canvas.height);
 
   platforms.forEach((platform) => {
     platform.draw(context);
