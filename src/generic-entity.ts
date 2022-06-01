@@ -1,12 +1,7 @@
-import { Coords } from "./player";
+import { EntityProps } from "./platform";
+import type { Coords } from "./player";
 
-export interface EntityProps {
-  x: number;
-  y: number;
-  image: HTMLImageElement;
-}
-
-export class Platform {
+export class GenericEntity {
   height: number;
   position: Coords;
   width: number;

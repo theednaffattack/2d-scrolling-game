@@ -11,7 +11,7 @@ interface Vector {
   y: YDir;
 }
 
-interface Velocity {
+export interface Velocity {
   x: number;
   y: number;
 }

@@ -1,3 +1,4 @@
+import { GenericEntity } from "./generic-entity";
 import { keys } from "./handle-keydown";
 import type { Platform } from "./platform";
 import type { Player } from "./player";
@@ -5,6 +6,7 @@ import type { Player } from "./player";
 interface AnimateProps {
   canvas: HTMLCanvasElement;
   context: CanvasRenderingContext2D;
+  genericEntities: GenericEntity[];
   player: Player;
   platforms: Platform[];
   scrollOffset: number;
@@ -13,6 +15,7 @@ interface AnimateProps {
 export function animate({
   canvas,
   context,
+  genericEntities,
   player,
   platforms,
   scrollOffset,
@@ -24,11 +27,22 @@ export function animate({
     throw new Error("Context object is missing!");
   }
   requestAnimationFrame(() =>
-    animate({ canvas, context, player, platforms, scrollOffset })
+    animate({
+      canvas,
+      context,
+      genericEntities,
+      player,
+      platforms,
+      scrollOffset,
+    })
   );
 
   context.fillStyle = "white";
   context.fillRect(0, 0, canvas.width, canvas.height);
+
+  genericEntities.forEach((entity) => {
+    entity.draw(context);
+  });
 
   platforms.forEach((platform) => {
     platform.draw(context);
@@ -44,19 +58,29 @@ export function animate({
   } else {
     player.velocity.x = 0;
 
-    // Move the platform right at the current player speed
+    // Move the platform and generic entities right
+    //  at the current player speed
     if (keys.right.pressed) {
       scrollOffset += 5;
       platforms.forEach((platform) => {
         platform.position.x -= 5;
+      });
+
+      genericEntities.forEach((entity) => {
+        entity.position.x -= 3;
       });
     } else if (keys.left.pressed) {
       scrollOffset -= 5;
       platforms.forEach((platform) => {
         platform.position.x += 5;
       });
+
+      genericEntities.forEach((entity) => {
+        entity.position.x += 3;
+      });
     }
   }
+
   platforms.forEach((platform) => {
     // Stop players on top of platforms (collision detection)
     if (
