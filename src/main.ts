@@ -24,8 +24,8 @@ const myImage = new Image();
 myImage.src = platform;
 
 export const platforms = [
-  new Platform({ x: 200, y: 100, image: myImage }),
-  new Platform({ x: 500, y: 200, image: myImage }),
+  new Platform({ x: -1, y: 470, image: myImage }),
+  new Platform({ x: myImage.width - 3, y: 470, image: myImage }),
 ];
 
 if (!context) {
