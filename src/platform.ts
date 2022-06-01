@@ -1,6 +1,6 @@
 import { Coords } from "./player";
 
-interface PlatformProps {
+export interface EntityProps {
   x: number;
   y: number;
   image: HTMLImageElement;
@@ -12,7 +12,7 @@ export class Platform {
   width: number;
   image: HTMLImageElement;
 
-  constructor({ x, y, image }: PlatformProps) {
+  constructor({ x, y, image }: EntityProps) {
     this.position = {
       x,
       y,
