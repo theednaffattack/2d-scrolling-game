@@ -17,7 +17,7 @@ This repo is for learning simple game development for the browser.
 6. [x] "scroll" the background
 7. [x] Win scenario
 8. [x] Image Platforms
-9. [] Paralax scroll
-10. [] Death pits
+9. [x] Paralax scroll
+10. [x] Death pits
 11. [] Level Creation
 12. [] Fine Tuning

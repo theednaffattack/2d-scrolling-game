@@ -1,7 +1,12 @@
 import { GenericEntity } from "./generic-entity";
 import { keys } from "./handle-keydown";
+import { reset } from "./reset";
+import { newImage } from "./new-image";
 import type { Platform } from "./platform";
-import type { Player } from "./player";
+import { Player } from "./player";
+import background from "../assets/background.png";
+import hills from "../assets/hills.png";
+import platformImage from "../assets/platform.png";
 
 interface AnimateProps {
   canvas: HTMLCanvasElement;
@@ -66,6 +71,8 @@ export function animate({
         platform.position.x -= 5;
       });
 
+      // Scroll the generic entities slower
+      // to create parallax effect.
       genericEntities.forEach((entity) => {
         entity.position.x -= 3;
       });
@@ -97,5 +104,19 @@ export function animate({
   // Win scenario
   if (scrollOffset >= 2000) {
     console.log("YOU WIN");
+  }
+
+  // Lose scenario
+  if (player.position.y > canvas.height) {
+    reset({
+      backgroundImage: newImage(background),
+      context,
+      genericEntities,
+      hillImage: newImage(hills),
+      platformImage: newImage(platformImage),
+      platforms,
+      player,
+      scrollOffset,
+    });
   }
 }
