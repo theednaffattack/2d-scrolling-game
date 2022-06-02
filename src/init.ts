@@ -1,10 +1,14 @@
 import { GenericEntity } from "./generic-entity";
-import { newImage } from "./new-image";
+
 import { Platform } from "./platform";
 import { Player } from "./player";
-import hills from "../assets/hills.png";
-import platform from "../assets/platform.png";
-import background from "../assets/background.png";
+
+import {
+  platformSmallTall,
+  backgroundImage,
+  hillImage,
+  platformImage,
+} from "./images";
 
 interface InitProps {
   // backgroundImage: HTMLImageElement;
@@ -20,26 +24,36 @@ interface InitProps {
 export function init({ context }: InitProps) {
   let player = new Player();
 
-  const platformImage = newImage(platform);
-
-  const hillImage = newImage(hills);
-
-  const backgroundImage = newImage(background);
-
   let platforms = [
-    new Platform({ x: -1, y: 470, image: platformImage }),
     new Platform({
-      x: platformImage.width + 100,
-      y: 470,
-      image: platformImage,
+      x:
+        platformImage.width * 4 +
+        300 -
+        2 +
+        platformImage.width -
+        platformSmallTall.width,
+      y: 270,
+      image: platformSmallTall,
     }),
+    new Platform({ x: -1, y: 470, image: platformImage }),
+    new Platform({ x: platformImage.width - 3, y: 470, image: platformImage }),
     new Platform({
       x: platformImage.width * 2 + 100,
       y: 470,
       image: platformImage,
     }),
     new Platform({
-      x: platformImage.width * 3 + 100,
+      x: platformImage.width * 3 + 300,
+      y: 470,
+      image: platformImage,
+    }),
+    new Platform({
+      x: platformImage.width * 4 + 300 - 2,
+      y: 470,
+      image: platformImage,
+    }),
+    new Platform({
+      x: platformImage.width * 5 + 700 - 2,
       y: 470,
       image: platformImage,
     }),
