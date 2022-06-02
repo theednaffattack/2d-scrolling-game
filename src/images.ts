@@ -5,7 +5,7 @@ import background from "../assets/background.png";
 import platformSmallTallImage from "../assets/platformSmallTall.png";
 import spriteStandRightImage from "../assets/spriteStandRight.png";
 import spriteStandLeftImage from "../assets/spriteStandLeft.png";
-import spriteRunRightImage from "../assets/spriteRunLeft.png";
+import spriteRunRightImage from "../assets/spriteRunRight.png";
 import spriteRunLeftImage from "../assets/spriteRunLeft.png";
 
 export const platformImage = newImage(platform);
