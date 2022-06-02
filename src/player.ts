@@ -47,7 +47,10 @@ export class Player {
   draw(context: CanvasRenderingContext2D) {
     context.drawImage(
       this.image,
-      0,
+      // image width times the current frame
+      // will keep us on the right sprite sequence
+      // image, by changing the crop start point
+      177 * this.frames,
       0,
       177,
       400,
@@ -59,6 +62,10 @@ export class Player {
   }
 
   update(context: CanvasRenderingContext2D) {
+    this.frames++;
+    if (this.frames > 28) {
+      this.frames = 0;
+    }
     this.draw(context);
     // Use velocity to move the player
     this.position.y += this.velocity.y;
