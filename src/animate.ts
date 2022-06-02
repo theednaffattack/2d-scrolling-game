@@ -101,8 +101,10 @@ export function animate({
     }
   });
 
+  const lastPlatform = platforms[platforms.length - 1];
+
   // Win scenario
-  if (scrollOffset >= 2000) {
+  if (scrollOffset >= lastPlatform.width * 5 + 300 - 2) {
     console.log("YOU WIN");
   }
 
