@@ -20,18 +20,22 @@ export function handleKeyup({ key }: KeyboardEvent, player: Player) {
         break;
       case "a":
         keys.left.pressed = false;
+        player.currentSprite = player.sprites.stand.left;
         break;
       case "s":
         keys.down.pressed = false;
         break;
       case "d":
         keys.right.pressed = false;
+        player.currentSprite = player.sprites.stand.right;
         break;
       case "ArrowLeft":
         keys.left.pressed = false;
+        player.currentSprite = player.sprites.stand.left;
         break;
       case "ArrowRight":
         keys.right.pressed = false;
+        player.currentSprite = player.sprites.stand.right;
         break;
       case "ArrowUp":
         keys.up.pressed = false;
