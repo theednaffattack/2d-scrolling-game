@@ -17,15 +17,16 @@ interface Vector {
   y: YDir;
 }
 
+interface SpriteProperties {
+  left: HTMLImageElement;
+  right: HTMLImageElement;
+  cropWidth: number;
+  width: number;
+}
+
 interface SpriteActions {
-  stand: {
-    left: HTMLImageElement;
-    right: HTMLImageElement;
-  };
-  run: {
-    left: HTMLImageElement;
-    right: HTMLImageElement;
-  };
+  stand: SpriteProperties;
+  run: SpriteProperties;
 }
 export interface Velocity {
   x: number;
@@ -34,6 +35,7 @@ export interface Velocity {
 
 export class Player {
   color: string;
+  currentCropWidth: number;
   currentSprite: HTMLImageElement;
   frames: number;
   height: number;
@@ -50,9 +52,17 @@ export class Player {
       stand: {
         left: spriteStandLeft,
         right: spriteStandRight,
+        cropWidth: 177,
+        width: 66,
       },
-      run: { left: spriteRunLeft, right: spriteRunRight },
+      run: {
+        left: spriteRunLeft,
+        right: spriteRunRight,
+        cropWidth: 340,
+        width: 127.875,
+      },
     };
+    this.currentCropWidth = this.sprites.stand.cropWidth;
     this.currentSprite = this.sprites.stand.right;
     this.frames = 0;
     this.height = 150;
@@ -76,9 +86,9 @@ export class Player {
       // image width times the current frame
       // will keep us on the right sprite sequence
       // image, by changing the crop start point
-      177 * this.frames,
+      this.currentCropWidth * this.frames,
       0,
-      177,
+      this.currentCropWidth,
       400,
       this.position.x,
       this.position.y,

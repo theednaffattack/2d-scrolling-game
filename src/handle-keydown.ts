@@ -36,6 +36,8 @@ export function handleKeydown({ key }: KeyboardEvent, player: Player) {
       case "a":
         keys.left.pressed = true;
         player.currentSprite = player.sprites.run.left;
+        player.currentCropWidth = player.sprites.run.cropWidth;
+        player.width = player.sprites.run.width;
         break;
       case "s":
         keys.down.pressed = true;
@@ -43,14 +45,20 @@ export function handleKeydown({ key }: KeyboardEvent, player: Player) {
       case "d":
         keys.right.pressed = true;
         player.currentSprite = player.sprites.run.right;
+        player.currentCropWidth = player.sprites.run.cropWidth;
+        player.width = player.sprites.run.width;
         break;
       case "ArrowLeft":
         keys.left.pressed = true;
         player.currentSprite = player.sprites.run.left;
+        player.currentCropWidth = player.sprites.run.cropWidth;
+        player.width = player.sprites.run.width;
         break;
       case "ArrowRight":
         keys.right.pressed = true;
         player.currentSprite = player.sprites.run.right;
+        player.currentCropWidth = player.sprites.run.cropWidth;
+        player.width = player.sprites.run.width;
         break;
       case "ArrowUp":
         keys.up.pressed = true;
