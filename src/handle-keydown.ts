@@ -35,18 +35,22 @@ export function handleKeydown({ key }: KeyboardEvent, player: Player) {
         break;
       case "a":
         keys.left.pressed = true;
+        player.currentSprite = player.sprites.run.left;
         break;
       case "s":
         keys.down.pressed = true;
         break;
       case "d":
         keys.right.pressed = true;
+        player.currentSprite = player.sprites.run.right;
         break;
       case "ArrowLeft":
         keys.left.pressed = true;
+        player.currentSprite = player.sprites.run.left;
         break;
       case "ArrowRight":
         keys.right.pressed = true;
+        player.currentSprite = player.sprites.run.right;
         break;
       case "ArrowUp":
         keys.up.pressed = true;
