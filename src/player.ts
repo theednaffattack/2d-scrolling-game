@@ -1,4 +1,5 @@
 import { GRAVITY } from "./constants";
+import { spriteStandRight } from "./images";
 import { canvas } from "./main";
 
 type XPosition = number;
@@ -18,7 +19,9 @@ export interface Velocity {
 
 export class Player {
   color: string;
+  frames: number;
   height: number;
+  image: HTMLImageElement;
   position: Coords;
   speed: number;
   velocity: Velocity;
@@ -26,22 +29,33 @@ export class Player {
 
   constructor() {
     this.color = "red";
-    this.height = 30;
-    this.speed = 10;
+    this.frames = 0;
+    this.height = 150;
+    this.image = spriteStandRight;
     this.position = {
       x: 100,
       y: 100,
     };
+    this.speed = 10;
     this.velocity = {
       x: 0,
       y: 1,
     };
-    this.width = 30;
+    this.width = 66;
   }
 
   draw(context: CanvasRenderingContext2D) {
-    context.fillStyle = this.color;
-    context.fillRect(this.position.x, this.position.y, this.width, this.height);
+    context.drawImage(
+      this.image,
+      0,
+      0,
+      177,
+      400,
+      this.position.x,
+      this.position.y,
+      this.width,
+      this.height
+    );
   }
 
   update(context: CanvasRenderingContext2D) {
