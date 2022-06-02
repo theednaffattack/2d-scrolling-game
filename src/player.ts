@@ -20,12 +20,14 @@ export class Player {
   color: string;
   height: number;
   position: Coords;
+  speed: number;
   velocity: Velocity;
   width: number;
 
   constructor() {
     this.color = "red";
     this.height = 30;
+    this.speed = 10;
     this.position = {
       x: 100,
       y: 100,

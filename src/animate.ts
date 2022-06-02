@@ -1,12 +1,12 @@
-import { GenericEntity } from "./generic-entity";
-import { keys } from "./handle-keydown";
-import { reset } from "./reset";
-import { newImage } from "./new-image";
-import type { Platform } from "./platform";
-import { Player } from "./player";
 import background from "../assets/background.png";
 import hills from "../assets/hills.png";
 import platformImage from "../assets/platform.png";
+import { GenericEntity } from "./generic-entity";
+import { keys } from "./handle-keydown";
+import { newImage } from "./new-image";
+import type { Platform } from "./platform";
+import { Player } from "./player";
+import { reset } from "./reset";
 
 interface AnimateProps {
   canvas: HTMLCanvasElement;
@@ -57,33 +57,33 @@ export function animate({
   // Move player left and right
   // But stop moving at 400 pixels
   if (keys.right.pressed && player.position.x <= 400) {
-    player.velocity.x = 5;
+    player.velocity.x = player.speed;
   } else if (keys.left.pressed && player.position.x > 100) {
-    player.velocity.x = -5;
+    player.velocity.x = -player.speed;
   } else {
     player.velocity.x = 0;
 
     // Move the platform and generic entities right
     //  at the current player speed
     if (keys.right.pressed) {
-      scrollOffset += 5;
+      scrollOffset += player.speed;
       platforms.forEach((platform) => {
-        platform.position.x -= 5;
+        platform.position.x -= player.speed;
       });
 
       // Scroll the generic entities slower
       // to create parallax effect.
       genericEntities.forEach((entity) => {
-        entity.position.x -= 3;
+        entity.position.x -= player.speed * 0.66;
       });
     } else if (keys.left.pressed) {
-      scrollOffset -= 5;
+      scrollOffset -= player.speed;
       platforms.forEach((platform) => {
-        platform.position.x += 5;
+        platform.position.x += player.speed;
       });
 
       genericEntities.forEach((entity) => {
-        entity.position.x += 3;
+        entity.position.x += player.speed * 0.66;
       });
     }
   }
@@ -101,8 +101,10 @@ export function animate({
     }
   });
 
+  const lastPlatform = platforms[platforms.length - 1];
+
   // Win scenario
-  if (scrollOffset >= 2000) {
+  if (scrollOffset >= lastPlatform.width * 5 + 300 - 2) {
     console.log("YOU WIN");
   }
 
