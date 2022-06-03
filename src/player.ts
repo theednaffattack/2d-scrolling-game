@@ -58,7 +58,7 @@ export class Player {
       run: {
         left: spriteRunLeft,
         right: spriteRunRight,
-        cropWidth: 340,
+        cropWidth: 341,
         width: 127.875,
       },
     };
@@ -99,7 +99,19 @@ export class Player {
 
   update(context: CanvasRenderingContext2D) {
     this.frames++;
-    if (this.frames > 28) {
+    // Reset frames for standing (and bobbing) sprite.
+    if (
+      this.frames > 59 &&
+      (this.currentSprite === this.sprites.stand.right ||
+        this.currentSprite === this.sprites.stand.left)
+    ) {
+      this.frames = 0;
+      // Reset frames for running sprite.
+    } else if (
+      this.frames > 29 &&
+      (this.currentSprite === this.sprites.run.right ||
+        this.currentSprite === this.sprites.run.left)
+    ) {
       this.frames = 0;
     }
     this.draw(context);
