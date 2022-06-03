@@ -2,7 +2,7 @@ import background from "../assets/background.png";
 import hills from "../assets/hills.png";
 import platformImage from "../assets/platform.png";
 import { GenericEntity } from "./generic-entity";
-import { keys } from "./handle-keydown";
+import { lastKey, keys } from "./handle-keydown";
 import { newImage } from "./new-image";
 import type { Platform } from "./platform";
 import { Player } from "./player";
@@ -103,6 +103,46 @@ export function animate({
       player.velocity.y = 0;
     }
   });
+
+  // Check for standing state transition to running
+  if (
+    keys.right.pressed &&
+    lastKey === "right" &&
+    player.currentSprite !== player.sprites.run.right
+  ) {
+    player.frames = 1;
+    player.currentSprite = player.sprites.run.right;
+    player.currentCropWidth = player.sprites.run.cropWidth;
+    player.width = player.sprites.run.width;
+  } else if (
+    keys.left.pressed &&
+    lastKey === "left" &&
+    player.currentSprite !== player.sprites.run.left
+  ) {
+    player.currentSprite = player.sprites.run.left;
+    player.currentCropWidth = player.sprites.run.cropWidth;
+    player.width = player.sprites.run.width;
+  } else if (
+    // If the left key is not being pressed but the
+    // last key pressed WAS left...
+    !keys.left.pressed &&
+    lastKey === "left" &&
+    player.currentSprite !== player.sprites.stand.left
+  ) {
+    player.currentSprite = player.sprites.stand.left;
+    player.currentCropWidth = player.sprites.stand.cropWidth;
+    player.width = player.sprites.stand.width;
+  } else if (
+    // If the left key is not being pressed but the
+    // last key pressed WAS left...
+    !keys.right.pressed &&
+    lastKey === "right" &&
+    player.currentSprite !== player.sprites.stand.right
+  ) {
+    player.currentSprite = player.sprites.stand.right;
+    player.currentCropWidth = player.sprites.stand.cropWidth;
+    player.width = player.sprites.stand.width;
+  }
 
   const lastPlatform = platforms[platforms.length - 1];
 

@@ -1,4 +1,10 @@
 import { GRAVITY } from "./constants";
+import {
+  spriteRunLeft,
+  spriteRunRight,
+  spriteStandLeft,
+  spriteStandRight,
+} from "./images";
 import { canvas } from "./main";
 
 type XPosition = number;
@@ -11,6 +17,17 @@ interface Vector {
   y: YDir;
 }
 
+interface SpriteProperties {
+  left: HTMLImageElement;
+  right: HTMLImageElement;
+  cropWidth: number;
+  width: number;
+}
+
+interface SpriteActions {
+  stand: SpriteProperties;
+  run: SpriteProperties;
+}
 export interface Velocity {
   x: number;
   y: number;
@@ -18,33 +35,85 @@ export interface Velocity {
 
 export class Player {
   color: string;
+  currentCropWidth: number;
+  currentSprite: HTMLImageElement;
+  frames: number;
   height: number;
+  image: HTMLImageElement;
   position: Coords;
   speed: number;
+  sprites: SpriteActions;
   velocity: Velocity;
   width: number;
 
   constructor() {
     this.color = "red";
-    this.height = 30;
-    this.speed = 10;
+    this.sprites = {
+      stand: {
+        left: spriteStandLeft,
+        right: spriteStandRight,
+        cropWidth: 177,
+        width: 66,
+      },
+      run: {
+        left: spriteRunLeft,
+        right: spriteRunRight,
+        cropWidth: 341,
+        width: 127.875,
+      },
+    };
+    this.currentCropWidth = this.sprites.stand.cropWidth;
+    this.currentSprite = this.sprites.stand.right;
+    this.frames = 0;
+    this.height = 150;
+    this.image = spriteStandRight;
     this.position = {
       x: 100,
       y: 100,
     };
+    this.speed = 10;
+
     this.velocity = {
       x: 0,
       y: 1,
     };
-    this.width = 30;
+    this.width = 66;
   }
 
   draw(context: CanvasRenderingContext2D) {
-    context.fillStyle = this.color;
-    context.fillRect(this.position.x, this.position.y, this.width, this.height);
+    context.drawImage(
+      this.currentSprite,
+      // image width times the current frame
+      // will keep us on the right sprite sequence
+      // image, by changing the crop start point
+      this.currentCropWidth * this.frames,
+      0,
+      this.currentCropWidth,
+      400,
+      this.position.x,
+      this.position.y,
+      this.width,
+      this.height
+    );
   }
 
   update(context: CanvasRenderingContext2D) {
+    this.frames++;
+    // Reset frames for standing (and bobbing) sprite.
+    if (
+      this.frames > 59 &&
+      (this.currentSprite === this.sprites.stand.right ||
+        this.currentSprite === this.sprites.stand.left)
+    ) {
+      this.frames = 0;
+      // Reset frames for running sprite.
+    } else if (
+      this.frames > 29 &&
+      (this.currentSprite === this.sprites.run.right ||
+        this.currentSprite === this.sprites.run.left)
+    ) {
+      this.frames = 0;
+    }
     this.draw(context);
     // Use velocity to move the player
     this.position.y += this.velocity.y;

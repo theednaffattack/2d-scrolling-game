@@ -1,5 +1,6 @@
 import type { Player } from "./player";
 
+export let lastKey: "right" | "left" | "up" | "down" | null;
 export const keys = {
   up: {
     pressed: false,
@@ -35,18 +36,26 @@ export function handleKeydown({ key }: KeyboardEvent, player: Player) {
         break;
       case "a":
         keys.left.pressed = true;
+        player.currentSprite = player.sprites.run.left;
+        player.currentCropWidth = player.sprites.run.cropWidth;
+        player.width = player.sprites.run.width;
+
+        lastKey = "left";
         break;
       case "s":
         keys.down.pressed = true;
         break;
       case "d":
         keys.right.pressed = true;
+        lastKey = "right";
         break;
       case "ArrowLeft":
         keys.left.pressed = true;
+        lastKey = "left";
         break;
       case "ArrowRight":
         keys.right.pressed = true;
+        lastKey = "right";
         break;
       case "ArrowUp":
         keys.up.pressed = true;

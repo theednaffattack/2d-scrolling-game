@@ -20,6 +20,7 @@ export function handleKeyup({ key }: KeyboardEvent, player: Player) {
         break;
       case "a":
         keys.left.pressed = false;
+
         break;
       case "s":
         keys.down.pressed = false;
@@ -29,9 +30,11 @@ export function handleKeyup({ key }: KeyboardEvent, player: Player) {
         break;
       case "ArrowLeft":
         keys.left.pressed = false;
+
         break;
       case "ArrowRight":
         keys.right.pressed = false;
+
         break;
       case "ArrowUp":
         keys.up.pressed = false;
