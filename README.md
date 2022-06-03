@@ -21,3 +21,8 @@ This repo is for learning simple game development for the browser.
 10. [x] Death pits
 11. [x] Level Creation
 12. [x] Fine Tuning
+13. [ ] Add enemies
+14. [ ] Add weapons
+15. [ ] Add floating platforms
+16. [ ] Add death animations
+17. [ ] Add better win state (slide down pole?)
